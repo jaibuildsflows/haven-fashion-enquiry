@@ -1,0 +1,134 @@
+{
+  "name": "Style Enquiry Automation",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "documentId": {
+          "__rl": true,
+          "value": "1a_GewCODmTNTFfHIlcHbTzuEjqbEEcC5WT-zmqpaJTs",
+          "mode": "list",
+          "cachedResultName": "Haven Fashion Hub - Style Enquiry (Responses)",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1a_GewCODmTNTFfHIlcHbTzuEjqbEEcC5WT-zmqpaJTs/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 282902814,
+          "mode": "list",
+          "cachedResultName": "Form Responses 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1a_GewCODmTNTFfHIlcHbTzuEjqbEEcC5WT-zmqpaJTs/edit#gid=282902814"
+        },
+        "event": "rowAdded",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "47f70bd1-5c70-402e-91ae-428dd8bc0f4e",
+      "name": "Google Sheets Trigger",
+      "credentials": {
+        "googleSheetsTriggerOAuth2Api": {
+          "id": "7hh7bCzZUZwvhQoy",
+          "name": "Bolaji -Google Sheets Trigger OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json['Email Address '] }}",
+        "subject": "=We've Received your Enquiry - Haven Fashion Hub",
+        "message": "=<div style=\"font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #f0f0f0; padding: 30px; border-radius: 10px;\">\n\n  <h2 style=\"color: #8B4513;\">✨ Haven Fashion Hub</h2>\n\n  <p>Hi {{ $json['Full Name '] }} ,</p>\n\n  <p>Thank you for reaching out! We have received your \n  enquiry and will be in touch within 24 hours.</p>\n\n  <div style=\"background: #fdf6f0; padding: 15px; \n  border-radius: 8px; margin: 20px 0;\">\n\n    <h3 style=\"color: #8B4513;\">Your Enquiry Summary</h3>\n\n    <p>👗 <b>Outfit Type:</b> \n {{ $json['Type of Outfit'] }} </p>\n\n    <p>📝 <b>Other Outfit Details:</b> \n {{ $json['If you selected \"other\" please specify'] }} </p>\n\n    <p>🎉 <b>Occasion:</b> \n   {{ $json['What is the occasion?'] }} </p>\n\n    <p>💰 <b>Budget:</b> \n    {{ $json['Budget Range'] }}</p>\n\n    <p>🧵 <b>Fabric Arrangement:</b> \n    {{ $json['Will you be providing your own fabric or would you like us to source it?'] }}</p>\n\n    <p>🎨 <b>Fabric Type:</b> \n    {{ $json['What type of fabric do you prefer?'] }}</p>\n\n    <p>📝 <b>Other Fabric Details:</b> \n {{ $json['If you selected \"other\" fabric type, please specify'] }} </p>\n\n    <p>🌈 <b>Colour:</b> \n    {{ $json['What colour or colours are you considering?'] }}</p>\n\n    <p>✨ <b>Special Design:</b> \n    {{ $json['Do you require any special design work?'] }}</p>\n\n    <p>📝 <b>Other Design Details:</b> \n{{ $json['If you selected \"other\" design, please specify'] }} </p>\n\n    <p>🧷 <b>Finishing/Closure:</b> \n {{ $json['What type of finishing or closure do you prefer?'] }} </p>\n\n    <p>📝 <b>Other Finishing Details:</b> \n  {{ $json['If you selected \"other\" finishing, please specify'] }} </p>\n\n    <p>📅 <b>Needed By:</b> \n {{ $json['When do you need it?'] }} </p>\n\n    <p>📋 <b>Special Requests:</b> \n  {{ $json['Any special requests?'] }} </p>\n\n  </div>\n\n  <p>We look forward to creating something \n  beautiful for you!</p>\n\n  <p style=\"color: #8B4513;\">\n    <b>Haven Fashion Hub</b><br>\n    📱 09138414228<br>\n    📧 akinwumibolaji9@gmail.com\n  </p>\n\n</div>\n",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        208,
+        0
+      ],
+      "id": "a36c0428-7469-436f-a105-423f9b0b7a60",
+      "name": "Send a message",
+      "webhookId": "06d351de-95d0-4629-9ffa-038be4245585",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "xco1Qc7S2n1fGPOZ",
+          "name": "Bolaji - Gmail OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "akinwumibolaji9@gmail.com",
+        "subject": "=\n📬 New Style Enquiry from {{ $('Google Sheets Trigger').item.json['Full Name '] }}",
+        "emailType": "text",
+        "message": "=You have a new style enquiry!\n\nName: {{ $('Google Sheets Trigger').item.json['Full Name '] }}\nPhone: {{ $('Google Sheets Trigger').item.json['Phone Number'] }}\nEmail: {{ $('Google Sheets Trigger').item.json['Email Address '] }}\n\nOutfit Type: {{ $('Google Sheets Trigger').item.json['Type of Outfit'] }}\nOther Outfit Details: {{ $('Google Sheets Trigger').item.json['If you selected \"other\" please specify'] }}\nOccasion: {{ $('Google Sheets Trigger').item.json['What is the occasion?'] }}\nBudget:  {{ $('Google Sheets Trigger').item.json['Budget Range'] }}\n\nFabric Arrangement: {{ $('Google Sheets Trigger').item.json['Will you be providing your own fabric or would you like us to source it?'] }}\nFabric Type: {{ $('Google Sheets Trigger').item.json['What type of fabric do you prefer?'] }}\nOther Fabric Details: {{ $('Google Sheets Trigger').item.json['If you selected \"other\" fabric type, please specify'] }}\nColour: {{ $('Google Sheets Trigger').item.json['What colour or colours are you considering?'] }}\n\nSpecial Design: {{ $('Google Sheets Trigger').item.json['Do you require any special design work?'] }}\nOther Design Details: {{ $('Google Sheets Trigger').item.json['If you selected \"other\" design, please specify'] }}\nFinishing/Closure: {{ $('Google Sheets Trigger').item.json['What type of finishing or closure do you prefer?'] }}\nOther Finishing Details: {{ $('Google Sheets Trigger').item.json['If you selected \"other\" finishing, please specify'] }}\n\nNeeded By: {{ $('Google Sheets Trigger').item.json['When do you need it?'] }} \nSpecial Requests: {{ $('Google Sheets Trigger').item.json['Any special requests?'] }}\nReply to this customer within 24 hours.\n",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        416,
+        0
+      ],
+      "id": "9b297300-78bd-4087-8090-d94239e02b6b",
+      "name": "Send a message1",
+      "webhookId": "aab76c89-914a-441d-b815-d399ddbd165e",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "xco1Qc7S2n1fGPOZ",
+          "name": "Bolaji - Gmail OAuth2 API"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Google Sheets Trigger": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message": {
+      "main": [
+        [
+          {
+            "node": "Send a message1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "d69c66fc-881f-4296-b729-90008b7b45cb",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "5330b24fec260746310ab481325a33686ac1f45840e1b59eee2c57a9846e8110"
+  },
+  "id": "d1wp8eYHB6ffq3Dx",
+  "tags": []
+}
