@@ -20,4 +20,4 @@ This workflow ensures every customer gets an instant
 response with zero manual effort.
 
 ## Workflow Screenshot
-![Haven Fashion Workflow](screenshot%20(56)
+![Haven Fashion Workflow](workflow.png.png)
