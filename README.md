@@ -7,6 +7,9 @@ for a fashion business.
 - Captures customer enquiries via Google Form
 - Automatically logs all enquiries to Google Sheets
 - Sends instant email replies to customers
+- Captures and acknowledges customer complaints automatically
+- Alerts business owner instantly with full complaint details
+
 
 ## Tools Used
 - n8n (workflow automation)
